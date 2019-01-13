@@ -1,0 +1,20 @@
+[gd_scene format=2]
+
+[node name="Camera" type="Camera"]
+
+transform = Transform( 0.707107, 0.40558, -0.579228, 0, 0.819152, 0.573576, 0.707107, -0.40558, 0.579228, -15.7475, 16.7462, 14.7402 )
+keep_aspect = 1
+cull_mask = 1048575
+environment = null
+h_offset = 0.0
+v_offset = 0.0
+doppler_tracking = 0
+projection = 1
+current = false
+fov = 70.0
+size = 24.0
+near = 0.05
+far = 100.0
+_sections_unfolded = [ "Transform" ]
+
+
