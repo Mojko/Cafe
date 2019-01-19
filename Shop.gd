@@ -3,6 +3,8 @@ extends "res://Inventory.gd"
 const Table = preload("res://Scenes/Furniture/Table/Table.tscn")
 const Chair = preload("res://Scenes/Furniture/Chair/Chair.tscn")
 
+#signal on_furniture_select(furniture)
+
 func _ready():
 	add_item(0, Table.get_instance_id())
 	add_item(1, Chair.get_instance_id())
@@ -13,37 +15,56 @@ func _on_inventory_slot_click(item):
 	selectedItem = instansiate_item(item)
 	
 #Put item on grid cell if holding
-func _on_tile_select(tile):
-	var ui = get_3d_ui()
-	ui.remove_from_ui(selectedItem)
-	
+func _on_raycast_hit(tile):
 	if(is_holding_item()):
 		var tilePosition = tile.global_transform.origin
 		selectedItem.global_transform.origin = Vector3(tilePosition.x, 0, tilePosition.z)
 		
+	if(tries_to_pickup_item(tile)):
+		selectedItem = tile
+	
 	if(should_release_item()):
 		selectedItem = null
 
 #Remove item from hand
-func _on_tile_remove():
+func _on_raycast_left():
 	if(selectedItem == null):
 		return
 		
 	if(should_release_item()):
-		print("REelased item")
+		var ui = get_3d_ui()
+		ui.stop_follow_mouse()
+		ui.remove_from_ui(selectedItem)
 		selectedItem.queue_free()
 		selectedItem = null
-	else:
-		var ui = get_3d_ui()
-		ui.put_on_ui(selectedItem)
-		ui.follow_mouse(selectedItem)
+		
+func _on_raycast_just_hit(tile):
+	print("Entered grid")
+	var ui = get_3d_ui()
+	ui.stop_follow_mouse()
+	ui.remove_from_ui(selectedItem)
+
+func _on_raycast_just_left():
+	print("Left grid")
+	var ui = get_3d_ui()
+	ui.put_on_ui(selectedItem)
+	ui.follow_mouse(selectedItem)
 	
 #Create a gameobject out of item
 func instansiate_item(item):
 	var tscn = instance_from_id(item)
 	var instance = tscn.instance()
+	#connect("on_furniture_select", instance, "_on_furniture_select")
 	get_owner().add_child(instance)
+	
 	return instance
+	
+#func _on_furniture_select():
+	
+#	pass
+	
+func tries_to_pickup_item(tile):
+	return Input.is_action_just_pressed("mouse_left") and selectedItem == null and tile.get_meta(Meta.TAG) == Tag.FURNITURE
 
 func is_holding_item():
 	return Input.is_action_pressed("mouse_left") and selectedItem != null

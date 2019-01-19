@@ -36,14 +36,18 @@ func _ready():
 #	# Update game logic here.
 #	pass
 
-func _on_tile_select(tile):
+func _on_raycast_hit(tile):
+	if(tile.get_meta(Meta.TAG) != Tag.GRID_TILE):
+		return
+	
 	if(selectedTile != null):
 		change_tile_color(defaultColor)
-
+		#change_tile_color(defaultColor)
+	
 	selectedTile = tile
 	change_tile_color(selectedColor)
 
-func _on_tile_remove():
+func _on_raycast_left():
 	if(selectedTile == null):
 		return
 

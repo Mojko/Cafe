@@ -1,10 +1,33 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Models/Chair/Chair.dae" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Furniture/Furniture.gd" type="Script" id=2]
 
-[node name="Chair" index="0" instance=ExtResource( 1 )]
+[sub_resource type="BoxShape" id=1]
+
+extents = Vector3( 1.08279, 1.88363, 1.10484 )
+
+[node name="Chair" instance=ExtResource( 1 )]
 
 script = ExtResource( 2 )
+
+[node name="StaticBody" type="StaticBody" parent="." index="10"]
+
+input_ray_pickable = true
+input_capture_on_drag = false
+collision_layer = 2
+collision_mask = 1
+friction = 1.0
+bounce = 0.0
+constant_linear_velocity = Vector3( 0, 0, 0 )
+constant_angular_velocity = Vector3( 0, 0, 0 )
+_sections_unfolded = [ "Collision" ]
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody" index="0"]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0922397, 1.86248, -0.0423799 )
+shape = SubResource( 1 )
+disabled = false
+_sections_unfolded = [ "Transform" ]
 
 

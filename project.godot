@@ -18,6 +18,8 @@ config/icon="res://icon.png"
 
 Tag="*res://Library/Tag.gd"
 NodeDefinition="*res://Library/NodeDefinition.gd"
+Meta="*res://Library/Meta.gd"
+CollisionLayer="*res://Library/CollisionLayer.gd"
 
 [input]
 
