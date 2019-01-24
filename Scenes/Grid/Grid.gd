@@ -12,7 +12,6 @@ var grid
 var selectedTile
 
 func _ready():
-
 	grid = Array2D.new().create(width, height)
 
 	for y in height:
@@ -54,4 +53,5 @@ func _on_raycast_left():
 	change_tile_color(defaultColor)
 
 func change_tile_color(color):
-	selectedTile.get_node(NodeDefinition.MESH).material_override.albedo_color = color
+	#selectedTile.get_node(NodeDefinition.MESH).material_override.albedo_color = color
+	pass

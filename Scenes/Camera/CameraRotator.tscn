@@ -1,0 +1,62 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Scenes/Camera/CameraRotator_temporary.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Camera/Camera.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/UI/UI3D.gd" type="Script" id=3]
+[ext_resource path="res://Rotate.gd" type="Script" id=4]
+
+[sub_resource type="CubeMesh" id=1]
+
+custom_aabb = AABB( 0, 0, 0, 0, 0, 0 )
+size = Vector3( 2, 2, 2 )
+subdivide_width = 0
+subdivide_height = 0
+subdivide_depth = 0
+
+[node name="CameraRotator" type="Spatial"]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 16 )
+script = ExtResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Camera" type="Camera" parent="." index="0"]
+
+transform = Transform( 0.823987, 0.367752, -0.431049, 0, 0.760753, 0.649042, 0.566608, -0.534802, 0.626851, -8.64884, 17.4424, 5.12666 )
+keep_aspect = 1
+cull_mask = 1048575
+environment = null
+h_offset = 0.0
+v_offset = 0.0
+doppler_tracking = 0
+projection = 0
+current = false
+fov = 70.0
+size = 1.0
+near = 0.05
+far = 100.0
+script = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="UI3D" type="Spatial" parent="Camera" index="0"]
+
+transform = Transform( 1, -1.78814e-007, -5.96046e-007, 4.17233e-007, 1, -4.17233e-007, -5.96046e-007, 1.78814e-007, 1, 2.28882e-005, -2.28882e-005, -2.19345e-005 )
+script = ExtResource( 3 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Camera/UI3D" index="0"]
+
+transform = Transform( -0.0870855, 0.820271, -0.565307, -0.824037, 0.259565, 0.503577, 0.559804, 0.509688, 0.653328, -7.77304, 12.9977, 10.3716 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 1 )
+skeleton = NodePath("..")
+material/0 = null
+script = ExtResource( 4 )
+
+

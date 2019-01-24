@@ -1,15 +1,55 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Models/Chair/Chair.dae" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Furniture/Furniture.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/Furniture/wood.material" type="Material" id=3]
 
-[sub_resource type="BoxShape" id=1]
+[sub_resource type="BoxShape" id=2]
 
 extents = Vector3( 1.08279, 1.88363, 1.10484 )
 
-[node name="Chair" instance=ExtResource( 1 )]
+[node name="Chair" index="0" instance=ExtResource( 1 )]
 
 script = ExtResource( 2 )
+renderedParts = 9
+
+[node name="Cube.001" parent="." index="0"]
+
+material/0 = ExtResource( 3 )
+_sections_unfolded = [ "material" ]
+
+[node name="Cube.002" parent="." index="1"]
+
+material/0 = ExtResource( 3 )
+_sections_unfolded = [ "material" ]
+
+[node name="Cube.003" parent="." index="2"]
+
+material/0 = ExtResource( 3 )
+
+[node name="Cube.004" parent="." index="3"]
+
+material/0 = ExtResource( 3 )
+
+[node name="Cube.005" parent="." index="4"]
+
+material/0 = ExtResource( 3 )
+
+[node name="Cube.006" parent="." index="5"]
+
+material/0 = ExtResource( 3 )
+
+[node name="Cube.007" parent="." index="6"]
+
+material/0 = ExtResource( 3 )
+
+[node name="Cube.008" parent="." index="7"]
+
+material/0 = ExtResource( 3 )
+
+[node name="Cube.009" parent="." index="8"]
+
+material/0 = ExtResource( 3 )
 
 [node name="StaticBody" type="StaticBody" parent="." index="10"]
 
@@ -26,7 +66,7 @@ _sections_unfolded = [ "Collision" ]
 [node name="CollisionShape" type="CollisionShape" parent="StaticBody" index="0"]
 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0922397, 1.86248, -0.0423799 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 disabled = false
 _sections_unfolded = [ "Transform" ]
 

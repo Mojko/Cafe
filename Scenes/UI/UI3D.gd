@@ -4,6 +4,9 @@ var uiElements = []
 var uiParentsElements = []
 var nodeFollowingMouse = null
 
+signal on_node_left_ui()
+signal on_node_entered_ui()
+
 func _ready():
 	pass
 
@@ -21,6 +24,8 @@ func put_on_ui(node):
 	uiParentsElements.append(node.get_parent())
 	
 	set_parent(node, self)
+	
+	node._on_node_entered_ui()
 	pass
 	
 func remove_from_ui(node):
@@ -32,8 +37,16 @@ func remove_from_ui(node):
 	set_parent(node, uiParentsElements[index])
 	uiElements.remove(index)
 	uiParentsElements.remove(index)
+	
+	node.global_transform.origin = Vector3(0,0,0)
+	
+	stop_follow_mouse()
+	node._on_node_left_ui()
+	return
+	
+func emit_node_left_ui_signal():
+	emit_signal("on_node_left_ui")
 	print("Removed from ui")
-	pass
 	
 func follow_mouse(node):
 	if(node == null or node.get_meta(Meta.ON_UI) == false):
